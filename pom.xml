@@ -11,7 +11,8 @@
 	<packaging>jar</packaging>
 	<version>1.0.1-SNAPSHOT</version>
 	<name>digraph-parser</name>
-	<url>https://github.com/paypal/digraph-parser</url>
+	<!-- Roche-CSI: Changed URL -->
+	<url>https://github.com/Roche-CSI/digraph-parser</url>
 	<description>Java parser for digraph DSL (Graphviz DOT language)</description>
 
 	<licenses>
@@ -23,30 +24,41 @@
 	</licenses>
 
 	<distributionManagement>
-		<repository>
-			<id>sonatype-nexus-staging</id>
-			<url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-		</repository>
-		<snapshotRepository>
-			<id>sonatype-nexus-snapshots</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
+        <!-- Roche-CSI: Changed location -->
+        <repository>
+            <id>github-deploy</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/Roche-CSI/digraph-parser</url>
+        </repository>
+        <snapshotRepository>
+            <id>github-deploy</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/Roche-CSI/digraph-parser</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 	<developers>
 		<developer>
 			<name>Oliver Suciu</name>
 			<organization>PayPal</organization>
 		</developer>
+		<!-- Roche-CSI: Added developer -->
+        <developer>
+            <name>Greg Gibeling</name>
+            <email>greg.gibeling@roche.com</email>
+            <organization>Roche</organization>
+        </developer>
 	</developers>
 
 	<scm>
-		<connection>scm:git:git@github.com:paypal/digraph-parser.git</connection>
-		<developerConnection>scm:git:git@github.com:paypal/digraph-parser.git</developerConnection>
-		<url>git@github.com:paypal/digraph-parser.git</url>
-	</scm>
+        <!-- Roche-CSI: Changed location -->
+        <connection>scm:git:git@github.com:Roche-CSI/digraph-parser.git</connection>
+        <url>https://github.com/Roche-CSI/digraph-parser.git</url>
+        <developerConnection>scm:git:git@github.com:Roche-CSI/digraph-parser.git</developerConnection>
+    </scm>
 
 	<properties>
+		<!-- Roche-CSI: Updated ANTLR -->
 		<antlr.version>4.13.1</antlr.version>
 	</properties>
 
@@ -68,6 +80,7 @@
 	</dependencies>
 
 	<build>
+		<!-- Roche-CSI: Added resources -->
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -93,6 +106,7 @@
 
 		<plugins>
 			<plugin>
+				<!-- Roche-CSI: Updated plugin & config -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.7.0</version>
@@ -144,6 +158,7 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<!-- Roche-CSI: Added plugin -->
 				<groupId>org.antlr</groupId>
 				<artifactId>antlr4-maven-plugin</artifactId>
 				<version>${antlr.version}</version>
@@ -161,6 +176,7 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<!-- Roche-CSI: Added plugin -->
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
 				<version>3.0.0</version>
