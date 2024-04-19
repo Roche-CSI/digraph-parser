@@ -1,112 +1,154 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <!-- Roche-CSI: Changed group to allow publishing, changed version to snapshot -->
-  <groupId>com.github.roche_csi.digraph_parser</groupId>
-  <!-- <groupId>com.paypal.digraph</groupId> -->
-  <artifactId>digraph-parser</artifactId>
-  <packaging>jar</packaging>
-  <version>1.0.1-SNAPSHOT</version>
-  <name>digraph-parser</name>
-  <url>https://github.com/paypal/digraph-parser</url>
-  <description>Java parser for digraph DSL (Graphviz DOT language)</description>
+	<!-- Roche-CSI: Changed group to allow publishing, changed version to
+	snapshot -->
+	<groupId>com.github.roche_csi.digraph_parser</groupId>
+	<!-- <groupId>com.paypal.digraph</groupId> -->
+	<artifactId>digraph-parser</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0.1-SNAPSHOT</version>
+	<name>digraph-parser</name>
+	<url>https://github.com/paypal/digraph-parser</url>
+	<description>Java parser for digraph DSL (Graphviz DOT language)</description>
 
-  <licenses>
-	<license>
-	  <name>BSD 3-Clause License</name>
-	  <url>https://opensource.org/licenses/BSD-3-Clause</url>
-	  <distribution>repo</distribution>
-	</license>
-  </licenses>
+	<licenses>
+		<license>
+			<name>BSD 3-Clause License</name>
+			<url>https://opensource.org/licenses/BSD-3-Clause</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
-  <distributionManagement>
-	<repository>
-		<id>sonatype-nexus-staging</id>
-		<url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-	</repository>
-	<snapshotRepository>
-		<id>sonatype-nexus-snapshots</id>
-		<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-	</snapshotRepository>
-  </distributionManagement>
+	<distributionManagement>
+		<repository>
+			<id>sonatype-nexus-staging</id>
+			<url>http://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+		<snapshotRepository>
+			<id>sonatype-nexus-snapshots</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 
-  <developers>
-	<developer>
-	  <name>Oliver Suciu</name>
-	  <organization>PayPal</organization>
-	</developer>
-  </developers>
+	<developers>
+		<developer>
+			<name>Oliver Suciu</name>
+			<organization>PayPal</organization>
+		</developer>
+	</developers>
 
-  <scm>
-	<connection>scm:git:git@github.com:paypal/digraph-parser.git</connection>
-	<developerConnection>scm:git:git@github.com:paypal/digraph-parser.git</developerConnection>
-	<url>git@github.com:paypal/digraph-parser.git</url>
-  </scm>
+	<scm>
+		<connection>scm:git:git@github.com:paypal/digraph-parser.git</connection>
+		<developerConnection>scm:git:git@github.com:paypal/digraph-parser.git</developerConnection>
+		<url>git@github.com:paypal/digraph-parser.git</url>
+	</scm>
+	
+	<properties>
+		<antlr.version>4.13.1</antlr.version>
+	</properties>
 
-  <dependencies>
-	<!-- compile -->
-	<dependency>
-		<groupId>org.antlr</groupId>
-		<artifactId>antlr4-runtime</artifactId>
-		<version>4.2</version>
-	</dependency>
+	<dependencies>
+		<!-- compile -->
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>antlr4-runtime</artifactId>
+			<version>${antlr.version}</version>
+		</dependency>
 
-	<!-- test -->
-	<dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-		<version>4.13.1</version>
-		<scope>test</scope>
-	</dependency>
-  </dependencies>
+		<!-- test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
-  <build>
-	<plugins>
-		<plugin>
-		  <groupId>org.apache.maven.plugins</groupId>
-		  <artifactId>maven-compiler-plugin</artifactId>
-		  <configuration>
-			<source>1.5</source>
-			<target>1.5</target>
-		  </configuration>
-		</plugin>
-		<plugin>
-		  <groupId>org.apache.maven.plugins</groupId>
-		  <artifactId>maven-jar-plugin</artifactId>
-		  <configuration>
-			<archive>
-			  <manifestEntries>
-				<Build-Id>${project.name}-${project.version}-${maven.build.timestamp}</Build-Id>
-			  </manifestEntries>
-			</archive>
-		  </configuration>
-		</plugin>
-		<plugin>
-		  <groupId>org.apache.maven.plugins</groupId>
-		  <artifactId>maven-source-plugin</artifactId>
-		  <executions>
-			<execution>
-			  <id>attach-sources</id>
-			  <goals>
-				<goal>jar</goal>
-			  </goals>
-			</execution>
-		  </executions>
-		</plugin>
-		<plugin>
-		  <groupId>org.apache.maven.plugins</groupId>
-		  <artifactId>maven-javadoc-plugin</artifactId>
-		  <executions>
-			<execution>
-			  <id>attach-javadoc</id>
-				<goals>
-				 <goal>jar</goal>
-				</goals>
-			</execution>
-		  </executions>
-		</plugin>
-	</plugins>
-  </build>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Build-Id>
+								${project.name}-${project.version}-${maven.build.timestamp}</Build-Id>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadoc</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.antlr</groupId>
+				<artifactId>antlr4-maven-plugin</artifactId>
+				<version>${antlr.version}</version>
+				<executions>
+					<execution>
+						<id>antlr</id>
+						<goals>
+							<goal>antlr4</goal>
+						</goals>
+						<configuration>
+							<visitor>true</visitor>
+							<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/main/target/generated-sources/antlr4</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
