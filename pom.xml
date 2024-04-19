@@ -2,10 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.paypal.digraph</groupId>
+  <!-- Roche-CSI: Changed group to allow publishing, changed version to snapshot -->
+  <groupId>com.github.roche_csi.digraph_parser</groupId>
+  <!-- <groupId>com.paypal.digraph</groupId> -->
   <artifactId>digraph-parser</artifactId>
   <packaging>jar</packaging>
-  <version>1.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <name>digraph-parser</name>
   <url>https://github.com/paypal/digraph-parser</url>
   <description>Java parser for digraph DSL (Graphviz DOT language)</description>
