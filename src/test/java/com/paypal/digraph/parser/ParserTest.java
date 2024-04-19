@@ -86,7 +86,7 @@ public class ParserTest
 			log(parser.getEdges());
 			
 			String nodeStr = "{a=GraphNode-a{}, b=GraphNode-b{}, bar=GraphNode-bar{kk=vv, kkk=vvv}, baz=GraphNode-baz{}, foo=GraphNode-foo{}, n1=GraphNode-n1{label=Node 1}, n2=GraphNode-n2{label=Node 2}, n3=GraphNode-n3{}, n4=GraphNode-n4{}, n5=GraphNode-n5{}, xxx=GraphNode-xxx{k=v}, yyy=GraphNode-yyy{k1=v1, k2=v2}}";
-			String edgeStr = "{a-b=GraphEdge-a-b{}, foo-bar=GraphEdge-foo-bar{fbk=fbv, ek=ev}, foo-baz=GraphEdge-foo-baz{ek=ev}, n1-n2=GraphEdge-n1-n2{style=dotted, label=A dotted edge}, n1-n4=GraphEdge-n1-n4{}, n2-n3=GraphEdge-n2-n3{}, n3-n5=GraphEdge-n3-n5{}, n4-n5=GraphEdge-n4-n5{}}";
+			String edgeStr = "{a-b=GraphEdge-a-b{}, foo-bar=GraphEdge-foo-bar{ek=ev, fbk=fbv}, foo-baz=GraphEdge-foo-baz{ek=ev}, n1-n2=GraphEdge-n1-n2{style=dotted, label=A dotted edge}, n1-n4=GraphEdge-n1-n4{}, n2-n3=GraphEdge-n2-n3{}, n3-n5=GraphEdge-n3-n5{}, n4-n5=GraphEdge-n4-n5{}}";
 			
 			Assert.assertEquals("testgraph", parser.getGraphId());
 			Assert.assertEquals(nodeStr, parser.getNodes().toString());
