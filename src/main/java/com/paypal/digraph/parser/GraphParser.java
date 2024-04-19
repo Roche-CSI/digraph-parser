@@ -49,8 +49,6 @@ import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.atn.ATNConfigSet;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.IntervalSet;
-import org.antlr.v4.runtime.misc.NotNull;
-import org.antlr.v4.runtime.misc.Nullable;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -115,17 +113,17 @@ public class GraphParser
 		Map<String,Object> nodeAttrs = new TreeMap<String,Object>();
 		
 		/*@Override*/
-		public void enterGraph(@NotNull DOTParser.GraphContext ctx) {
+		public void enterGraph(DOTParser.GraphContext ctx) {
 			if (ctx.id() != null) mGraphId = ctx.id().getText();
 		}
 		
 		/*@Override*/
-		public void exitGraph(@NotNull DOTParser.GraphContext ctx) {
+		public void exitGraph(DOTParser.GraphContext ctx) {
 			// no-op
 		}
 		
 		/*@Override*/
-		public void enterNode_id(@NotNull DOTParser.Node_idContext ctx) {
+		public void enterNode_id(DOTParser.Node_idContext ctx) {
 			String nodeId = ctx.id().getText();
 			GraphNode node = mNodeMap.get(nodeId);
 			if (node == null) {
@@ -136,17 +134,17 @@ public class GraphParser
 		}
 		
 		/*@Override*/
-		public void exitNode_id(@NotNull DOTParser.Node_idContext ctx) {
+		public void exitNode_id(DOTParser.Node_idContext ctx) {
 			// no-op
 		}
 		
 		/*@Override*/
-		public void enterNode_stmt(@NotNull DOTParser.Node_stmtContext ctx) {
+		public void enterNode_stmt(DOTParser.Node_stmtContext ctx) {
 			populateAttributes(ctx.attr_list(), nodeAttrs);
 		}
 
 		/*@Override*/
-		public void exitNode_stmt(@NotNull DOTParser.Node_stmtContext ctx) {
+		public void exitNode_stmt(DOTParser.Node_stmtContext ctx) {
 			nodeAttrs.clear();
 		}
 	}
@@ -160,37 +158,37 @@ public class GraphParser
 		EdgeCtx edgeCtx;
 		
 		/*@Override*/
-		public void enterNode_id(@NotNull DOTParser.Node_idContext ctx) {
+		public void enterNode_id(DOTParser.Node_idContext ctx) {
 			String nodeId = ctx.id().getText();
 			graphCtx.addNode(nodeId);
 		}
 		
 		/*@Override*/
-		public void exitNode_id(@NotNull DOTParser.Node_idContext ctx) {
+		public void exitNode_id(DOTParser.Node_idContext ctx) {
 			// no-op
 		}
 		
 		/*@Override*/
-		public void enterSubgraph(@NotNull DOTParser.SubgraphContext ctx) {
+		public void enterSubgraph(DOTParser.SubgraphContext ctx) {
 			// enter new nested subgraph ctx
 			graphCtx = new GraphCtx(graphCtx);
 		}
 		
 		/*@Override*/
-		public void exitSubgraph(@NotNull DOTParser.SubgraphContext ctx) {
+		public void exitSubgraph(DOTParser.SubgraphContext ctx) {
 			// leave nested ctx, pop previous parent ctx
 			graphCtx = graphCtx.parent;
 		}
 		
 		/*@Override*/
-		public void enterEdge_stmt(@NotNull DOTParser.Edge_stmtContext ctx) {
+		public void enterEdge_stmt(DOTParser.Edge_stmtContext ctx) {
 			// enter new nested edge ctx
 			edgeCtx = new EdgeCtx(edgeCtx, new GraphCtx(graphCtx), new GraphCtx(graphCtx), ctx.attr_list());
 			graphCtx = edgeCtx.src; // point to src, next node/subgraph populates it
 		}
 		
 		/*@Override*/
-		public void exitEdge_stmt(@NotNull DOTParser.Edge_stmtContext ctx) {
+		public void exitEdge_stmt(DOTParser.Edge_stmtContext ctx) {
 			addEdges(edgeCtx.src.graph, edgeCtx.dest.graph, edgeCtx.attrs);
 			
 			// leave nested ctx, pop previous parent ctx
@@ -199,7 +197,7 @@ public class GraphParser
 		}
 		
 		/*@Override*/
-		public void enterEdgeop(@NotNull DOTParser.EdgeopContext ctx) {
+		public void enterEdgeop(DOTParser.EdgeopContext ctx) {
 			addEdges(edgeCtx.src.graph, edgeCtx.dest.graph, edgeCtx.attrs);
 			
 			if (edgeCtx.srcFlag) {
@@ -216,7 +214,7 @@ public class GraphParser
 		}
 		
 		/*@Override*/
-		public void exitEdgeop(@NotNull DOTParser.EdgeopContext ctx) {
+		public void exitEdgeop(DOTParser.EdgeopContext ctx) {
 			// no-op
 		}
 		
@@ -341,43 +339,43 @@ public class GraphParser
 	 */
 	private class ErrorListener extends BaseErrorListener
 	{
-		public void syntaxError(@NotNull Recognizer<?, ?> recognizer,
-				@Nullable Object offendingSymbol, int line,
-				int charPositionInLine, @NotNull String msg,
-				@Nullable RecognitionException e)
+		public void syntaxError(Recognizer<?, ?> recognizer,
+				Object offendingSymbol, int line,
+				int charPositionInLine, String msg,
+				RecognitionException e)
 		{
 			mErrMsg = "at line " + line + ":" + charPositionInLine + " " + msg;
 			throw e;
 		}
 
 		@Override
-		public void reportAmbiguity(@NotNull Parser recognizer,
-									@NotNull DFA dfa,
+		public void reportAmbiguity(Parser recognizer,
+									DFA dfa,
 									int startIndex,
 									int stopIndex,
 									boolean exact,
-									@Nullable BitSet ambigAlts,
-									@NotNull ATNConfigSet configs)
+									BitSet ambigAlts,
+									ATNConfigSet configs)
 		{
 		}
 
 		@Override
-		public void reportAttemptingFullContext(@NotNull Parser recognizer,
-												@NotNull DFA dfa,
+		public void reportAttemptingFullContext(Parser recognizer,
+												DFA dfa,
 												int startIndex,
 												int stopIndex,
-												@Nullable BitSet conflictingAlts,
-												@NotNull ATNConfigSet configs)
+												BitSet conflictingAlts,
+												ATNConfigSet configs)
 		{
 		}
 
 		@Override
-		public void reportContextSensitivity(@NotNull Parser recognizer,
-											 @NotNull DFA dfa,
+		public void reportContextSensitivity(Parser recognizer,
+											 DFA dfa,
 											 int startIndex,
 											 int stopIndex,
 											 int prediction,
-											 @NotNull ATNConfigSet configs)
+											 ATNConfigSet configs)
 		{
 		}
 	}
